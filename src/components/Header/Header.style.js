@@ -12,7 +12,6 @@ export const HeaderWrapper = styled.header`
   border: 3px solid rgba(255, 255, 255, 0.289199);
   border-radius: 15px;
   margin-top: 48px;
-  margin-bottom: 64px;
 
   img {
     margin-left: 33.32px;

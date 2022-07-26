@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 import GameChoice from "../GameChoice/GameChoice";
+import GamePicked from "../GamePicked/GamePicked";
 import Header from "../Header/Header";
 import { AppWrapper } from "./App.style";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 export default function App() {
   const [currentPlayerChoice, setCurrentPlayerChoice] = useState(null);
   const [currentIaChoice, setCurrentIaChoice] = useState(null);
-  const [score, setScore] = useState({ player: 0, ia: 0 });
+  const [score, setScore] = useLocalStorage("score", { player: 0, ia: 0 });
   const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(null);
 
   const handleClick = (e) => {
     e.preventDefault();
     // Get the players choice
     setCurrentPlayerChoice(e.target.value);
     playIa();
+    setLoading(true);
   };
 
   // Play the IA
@@ -77,29 +81,32 @@ export default function App() {
     if (currentPlayerChoice && currentIaChoice) {
       setResult(getGameResult(currentPlayerChoice, currentIaChoice));
       getScore(currentPlayerChoice, currentIaChoice);
-      setCurrentPlayerChoice(null);
-      setCurrentIaChoice(null);
     }
   }, [currentPlayerChoice, currentIaChoice]);
+
+  const redirectToGameResult = () => {
+    if (!currentPlayerChoice && !currentIaChoice) {
+      return <GameChoice handleClick={handleClick} />;
+    } else {
+      return (
+        <GamePicked
+          currentPlayerChoice={currentPlayerChoice}
+          setCurrentPlayerChoice={setCurrentPlayerChoice}
+          currentIaChoice={currentIaChoice}
+          setCurrentIaChoice={setCurrentIaChoice}
+          result={result}
+          loading={loading}
+          setLoading={setLoading}
+        />
+      );
+    }
+  };
 
   return (
     <AppWrapper>
       <Header score={score} />
-      <GameChoice />
-      {/* <button type="button" value="paper" onClick={handleClick}>
-        Papper
-      </button>
-      <button value="scissors" onClick={handleClick}>
-        Scissors
-      </button>
-      <button value="rock" onClick={handleClick}>
-        Rock
-      </button>
-
-      <span>{result}</span>
-      <span>
-        {score.player} / {score.ia}
-      </span> */}
+      {/* Rendering different components */}
+      {redirectToGameResult()}
     </AppWrapper>
   );
 }
