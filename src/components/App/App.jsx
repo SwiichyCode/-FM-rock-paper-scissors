@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import GameChoice from "../GameChoice/GameChoice";
+import Header from "../Header/Header";
+import { AppWrapper } from "./App.style";
 
 export default function App() {
   const [currentPlayerChoice, setCurrentPlayerChoice] = useState(null);
@@ -80,8 +83,10 @@ export default function App() {
   }, [currentPlayerChoice, currentIaChoice]);
 
   return (
-    <div>
-      <button type="button" value="paper" onClick={handleClick}>
+    <AppWrapper>
+      <Header score={score} />
+      <GameChoice />
+      {/* <button type="button" value="paper" onClick={handleClick}>
         Papper
       </button>
       <button value="scissors" onClick={handleClick}>
@@ -94,7 +99,7 @@ export default function App() {
       <span>{result}</span>
       <span>
         {score.player} / {score.ia}
-      </span>
-    </div>
+      </span> */}
+    </AppWrapper>
   );
 }
