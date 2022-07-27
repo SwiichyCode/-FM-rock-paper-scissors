@@ -52,7 +52,9 @@ export default function GamePicked({
       <div className="ia-picked">
         <h2>the house picked</h2>
         {loading ? (
-          <div className="loading-ia"></div>
+          <div className="content-loading-ia">
+            <div className="loading-ia"></div>
+          </div>
         ) : (
           <BtnPicked className={`btnWrapper-${currentIaChoice}`}>
             <div className={`content-btn ${currentIaChoice}-bg`}>

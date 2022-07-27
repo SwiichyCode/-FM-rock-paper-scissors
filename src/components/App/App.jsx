@@ -84,6 +84,7 @@ export default function App() {
     }
   }, [currentPlayerChoice, currentIaChoice]);
 
+  // Render gestion
   const redirectToGameResult = () => {
     if (!currentPlayerChoice && !currentIaChoice) {
       return <GameChoice handleClick={handleClick} />;

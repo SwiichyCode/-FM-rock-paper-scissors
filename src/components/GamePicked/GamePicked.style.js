@@ -26,6 +26,14 @@ export const GamePickedWrapper = styled.div`
     }
   }
 
+  .content-loading-ia {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 292.61px;
+    height: 300px;
+  }
+
   .loading-ia {
     width: 224.63px;
     height: 224.63px;
@@ -41,6 +49,7 @@ export const GamePickedWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 16px;
+    margin-right: 55px;
 
     h2 {
       font-weight: 700;
@@ -50,6 +59,24 @@ export const GamePickedWrapper = styled.div`
       text-transform: uppercase;
       color: #ffffff;
       text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.196706);
+    }
+
+    button {
+      background: linear-gradient(0deg, #f3f3f3 0%, #ffffff 100%);
+      box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.196706);
+      border-radius: 8px;
+      padding: 15px 62px 14px 60px;
+      font-size: 16px;
+      line-height: 19px;
+      letter-spacing: 2.5px;
+      color: #3b4262;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        color: #db2e4d;
+      }
     }
   }
 `;
