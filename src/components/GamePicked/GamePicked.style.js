@@ -6,6 +6,8 @@ export const GamePickedWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 72px;
+  gap: ${(props) => (props.result ? `0px` : `64px`)};
+  transition: all 0.3s ease-in;
 
   .player-picked,
   .ia-picked {

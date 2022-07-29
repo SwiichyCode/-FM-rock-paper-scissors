@@ -1,13 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { HeaderScoreWrapper } from "./HeaderScore.style";
 
-export default function HeaderScore({ score }) {
-  const winrate = Math.round(
-    (score.player / (score.player + score.computer)) * 100
-  );
-
-  useEffect(() => {}, [winrate]);
-
+export default function HeaderScore({ score, winrate }) {
   return (
     <HeaderScoreWrapper>
       <h2>

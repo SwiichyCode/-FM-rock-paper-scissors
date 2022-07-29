@@ -1,17 +1,17 @@
 import React from "react";
 import { GameChoiceWrapper, BtnWrapper } from "./GameChoice.style";
 
-export default function GameChoice({ handleClick }) {
+export default function GameChoice({ handlePlayerChoise }) {
   return (
     <GameChoiceWrapper>
       {/* Paper  */}
-      <BtnWrapper className={"btnWrapper-paper"}>
+      <BtnWrapper className={"btnWrapper-paper btn-w"}>
         <div className="content-btn paper-bg">
           <div className="shadow-btn">
             <button
               className="btn btn-paper"
               value="paper"
-              onClick={handleClick}
+              onClick={handlePlayerChoise}
             ></button>
           </div>
         </div>
@@ -23,7 +23,7 @@ export default function GameChoice({ handleClick }) {
             <button
               className="btn btn-scissors"
               value="scissors"
-              onClick={handleClick}
+              onClick={handlePlayerChoise}
             ></button>
           </div>
         </div>
@@ -35,7 +35,7 @@ export default function GameChoice({ handleClick }) {
             <button
               className="btn btn-rock"
               value="rock"
-              onClick={handleClick}
+              onClick={handlePlayerChoise}
             ></button>
           </div>
         </div>

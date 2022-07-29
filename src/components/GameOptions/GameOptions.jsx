@@ -1,9 +1,16 @@
+import React from "react";
 import styled from "styled-components";
 
-export const GameRulesWrapper = styled.div`
+export default function GameOptions({ children }) {
+  return <GameOptionsWrapper>{children}</GameOptionsWrapper>;
+}
+
+const GameOptionsWrapper = styled.div`
+  display: flex;
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 20px;
+  right: 20px;
+  gap: 1em;
 
   button {
     border: 1px solid #ffffff;
@@ -16,5 +23,7 @@ export const GameRulesWrapper = styled.div`
     color: #ffffff;
     padding: 11px 36px 10px 37px;
     border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
   }
 `;

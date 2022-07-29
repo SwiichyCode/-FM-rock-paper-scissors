@@ -23,6 +23,7 @@ export const BtnWrapper = styled.div.attrs((props) => ({
   height: 203px;
   border-radius: 50%;
   cursor: pointer;
+  box-sizing: initial;
 
   &.btnWrapper-paper {
     left: 0;

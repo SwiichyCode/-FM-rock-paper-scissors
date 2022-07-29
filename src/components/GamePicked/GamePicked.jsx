@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { BtnPicked, GamePickedWrapper } from "./GamePicked.style";
+import { normalModeRules } from "../../utils/rules";
 
 export default function GamePicked({
   currentPlayerChoice,
@@ -10,6 +11,8 @@ export default function GamePicked({
   replay,
   score,
   setScore,
+  loading,
+  setLoading,
 }) {
   const playComputer = useCallback(() => {
     const choices = ["rock", "paper", "scissors"];
@@ -21,29 +24,12 @@ export default function GamePicked({
   useEffect(() => {
     setTimeout(() => {
       playComputer();
-    }, 3000);
+    }, 1500);
   }, [playComputer]);
 
   // Get the winner
   const getWinner = useCallback(() => {
-    const rules = {
-      rock: {
-        rock: "draw",
-        paper: "lose",
-        scissors: "win",
-      },
-      paper: {
-        rock: "win",
-        paper: "draw",
-        scissors: "lose",
-      },
-      scissors: {
-        rock: "lose",
-        paper: "win",
-        scissors: "draw",
-      },
-    };
-    const winner = rules[currentPlayerChoice][currentComputerChoice];
+    const winner = normalModeRules[currentPlayerChoice][currentComputerChoice];
     return setResult(winner);
   }, [currentPlayerChoice, currentComputerChoice, setResult]);
 
@@ -64,10 +50,8 @@ export default function GamePicked({
     getScore();
   }, [result]);
 
-  console.log(score);
-
   return (
-    <GamePickedWrapper>
+    <GamePickedWrapper result={result}>
       <div className="player-picked">
         <h2>you picked</h2>
         {/* Paper  */}
