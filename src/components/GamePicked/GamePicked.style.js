@@ -5,7 +5,6 @@ export const GamePickedWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
   margin-top: 72px;
 
   .player-picked,
@@ -41,15 +40,16 @@ export const GamePickedWrapper = styled.div`
     background: rgba(0, 0, 0, 0.1);
   }
 
-  .player-picked {
+  // A modifier
+  /* .player-picked {
     margin-right: 72px;
-  }
+  } */
 
   .result {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin-right: 55px;
+    margin: 0 55px;
 
     h2 {
       font-weight: 700;

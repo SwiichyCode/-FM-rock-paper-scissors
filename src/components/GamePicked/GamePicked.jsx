@@ -1,30 +1,70 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { BtnPicked, GamePickedWrapper } from "./GamePicked.style";
 
 export default function GamePicked({
   currentPlayerChoice,
-  setCurrentPlayerChoice,
-  currentIaChoice,
-  setCurrentIaChoice,
+  currentComputerChoice,
+  setCurrentComputerChoice,
   result,
-  loading,
-  setLoading,
+  setResult,
+  replay,
+  score,
+  setScore,
 }) {
-  // Fake loading ia choice
+  const playComputer = useCallback(() => {
+    const choices = ["rock", "paper", "scissors"];
+    const randomChoice = choices[Math.floor(Math.random() * choices.length)];
+    return setCurrentComputerChoice(randomChoice);
+  }, [setCurrentComputerChoice]);
+
+  // Play computer
   useEffect(() => {
     setTimeout(() => {
-      setLoading(false);
+      playComputer();
     }, 3000);
-  }, []);
+  }, [playComputer]);
 
-  // Replay the game
-  const handleClick = (e) => {
-    e.preventDefault();
+  // Get the winner
+  const getWinner = useCallback(() => {
+    const rules = {
+      rock: {
+        rock: "draw",
+        paper: "lose",
+        scissors: "win",
+      },
+      paper: {
+        rock: "win",
+        paper: "draw",
+        scissors: "lose",
+      },
+      scissors: {
+        rock: "lose",
+        paper: "win",
+        scissors: "draw",
+      },
+    };
+    const winner = rules[currentPlayerChoice][currentComputerChoice];
+    return setResult(winner);
+  }, [currentPlayerChoice, currentComputerChoice, setResult]);
 
-    setCurrentPlayerChoice(null);
-    setCurrentIaChoice(null);
-    setLoading(null);
+  useEffect(() => {
+    getWinner();
+  }, [getWinner]);
+
+  const getScore = () => {
+    if (result === "win") {
+      setScore({ ...score, player: score.player + 1 });
+    } else if (result === "lose") {
+      setScore({ ...score, computer: score.computer + 1 });
+    }
   };
+
+  // Update score
+  useEffect(() => {
+    getScore();
+  }, [result]);
+
+  console.log(score);
 
   return (
     <GamePickedWrapper>
@@ -43,30 +83,30 @@ export default function GamePicked({
           </div>
         </BtnPicked>
       </div>
-      {!loading && (
+      {result && (
         <div className="result">
-          <h2>{result}</h2>
-          <button onClick={handleClick}>play again</button>
+          <h2>You {result}</h2>
+          <button onClick={replay}>play again</button>
         </div>
       )}
       <div className="ia-picked">
         <h2>the house picked</h2>
-        {loading ? (
-          <div className="content-loading-ia">
-            <div className="loading-ia"></div>
-          </div>
-        ) : (
-          <BtnPicked className={`btnWrapper-${currentIaChoice}`}>
-            <div className={`content-btn ${currentIaChoice}-bg`}>
+        {result ? (
+          <BtnPicked className={`btnWrapper-${currentComputerChoice}`}>
+            <div className={`content-btn ${currentComputerChoice}-bg`}>
               <div className="shadow-btn">
                 <button
-                  className={`btn btn-${currentIaChoice}`}
+                  className={`btn btn-${currentComputerChoice}`}
                   value="paper"
                   disabled={true}
                 ></button>
               </div>
             </div>
           </BtnPicked>
+        ) : (
+          <div className="content-loading-ia">
+            <div className="loading-ia"></div>
+          </div>
         )}
       </div>
     </GamePickedWrapper>
