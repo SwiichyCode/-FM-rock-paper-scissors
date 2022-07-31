@@ -5,17 +5,16 @@ import GamePicked from "../GamePicked/GamePicked";
 import { AppWrapper } from "./App.style";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import GameOptions from "../GameOptions/GameOptions";
-import GameRules from "../GameOptions/GameRules";
-import GameParams from "../GameOptions/GameParams";
-import { config } from "../../utils/config";
+import GameRules from "../GameOptions/GameRules/GameRules";
+import GameParams from "../GameOptions/GameParams/GameParams";
+// import { config } from "../../utils/config";
 import GameInformations from "../GameInformations/GameInformations";
 
 export default function App() {
-  const initialMode = config.gameMode.default;
-  const [gameMode, setGameMode] = useState(initialMode);
+  // const initialMode = config.gameMode.values;
+  const [gameMode, setGameMode] = useState("normal");
   const [currentPlayerChoice, setCurrentPlayerChoice] = useState(null);
   const [currentComputerChoice, setCurrentComputerChoice] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [score, setScore] = useLocalStorage("score", {
     player: 0,
@@ -32,7 +31,6 @@ export default function App() {
     setCurrentPlayerChoice(null);
     setCurrentComputerChoice(null);
     setResult(null);
-    setLoading(false);
   };
 
   const getWinrate = useCallback(() => {
@@ -44,8 +42,6 @@ export default function App() {
   useEffect(() => {
     getWinrate();
   }, [winrate, getWinrate]);
-
-  console.log(winrate);
 
   return (
     <AppWrapper>
@@ -59,21 +55,20 @@ export default function App() {
           result={result}
           setResult={setResult}
           replay={replay}
-          loading={loading}
-          setLoading={setLoading}
           score={score}
           setScore={setScore}
+          gameMode={gameMode}
         />
       ) : (
         <GameChoice
-          handlePlayerChoise={handlePlayerChoice}
+          handlePlayerChoice={handlePlayerChoice}
           gameMode={gameMode}
         />
       )}
 
       {/* Params / Rules */}
       <GameOptions>
-        <GameParams setGameMode={setGameMode} />
+        <GameParams gameMode={gameMode} setGameMode={setGameMode} />
         <GameRules />
       </GameOptions>
     </AppWrapper>

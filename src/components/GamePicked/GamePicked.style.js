@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BtnWrapper } from "../GameChoice/GameChoice.style";
+import { BtnWrapper } from "../GameChoice/NormalGameChoice/NormalGameChoice.style";
 
 export const GamePickedWrapper = styled.div`
   display: flex;
@@ -7,7 +7,6 @@ export const GamePickedWrapper = styled.div`
   align-items: center;
   margin-top: 72px;
   gap: ${(props) => (props.result ? `0px` : `64px`)};
-  transition: all 0.3s ease-in;
 
   .player-picked,
   .ia-picked {
@@ -95,6 +94,16 @@ export const BtnPicked = styled(BtnWrapper)`
     right: initial;
   }
   &.btnWrapper-rock {
+    bottom: initial;
+    left: initial;
+    transform: initial;
+  }
+  &.btnWrapper-lizard {
+    bottom: initial;
+    left: initial;
+    transform: initial;
+  }
+  &.btnWrapper-spock {
     bottom: initial;
     left: initial;
     transform: initial;

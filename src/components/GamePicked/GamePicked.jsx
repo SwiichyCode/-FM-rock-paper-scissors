@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 import { BtnPicked, GamePickedWrapper } from "./GamePicked.style";
 import { normalModeRules } from "../../utils/rules";
+import { hardcoreModeRules } from "../../utils/rules";
 
 export default function GamePicked({
   currentPlayerChoice,
@@ -11,14 +12,20 @@ export default function GamePicked({
   replay,
   score,
   setScore,
-  loading,
-  setLoading,
+  gameMode,
 }) {
   const playComputer = useCallback(() => {
-    const choices = ["rock", "paper", "scissors"];
-    const randomChoice = choices[Math.floor(Math.random() * choices.length)];
-    return setCurrentComputerChoice(randomChoice);
-  }, [setCurrentComputerChoice]);
+    const normalChoices = ["rock", "paper", "scissors"];
+    const hardcoreChoices = ["rock", "paper", "scissors", "lizard", "spock"];
+    const randomNormalChoice = normalChoices[Math.floor(Math.random() * normalChoices.length)]; // prettier-ignore
+    const randomHardcoreChoice = hardcoreChoices[Math.floor(Math.random() * hardcoreChoices.length)]; // prettier-ignore
+
+    if (gameMode === "normal") {
+      return setCurrentComputerChoice(randomNormalChoice);
+    } else {
+      return setCurrentComputerChoice(randomHardcoreChoice);
+    }
+  }, [setCurrentComputerChoice, gameMode]);
 
   // Play computer
   useEffect(() => {
@@ -28,14 +35,21 @@ export default function GamePicked({
   }, [playComputer]);
 
   // Get the winner
-  const getWinner = useCallback(() => {
-    const winner = normalModeRules[currentPlayerChoice][currentComputerChoice];
-    return setResult(winner);
-  }, [currentPlayerChoice, currentComputerChoice, setResult]);
+  const getWinner = useCallback(
+    (rules) => {
+      const winner = rules[currentPlayerChoice][currentComputerChoice];
+      return setResult(winner);
+    },
+    [currentPlayerChoice, currentComputerChoice, setResult]
+  );
 
   useEffect(() => {
-    getWinner();
-  }, [getWinner]);
+    if (gameMode === "normal") {
+      getWinner(normalModeRules);
+    } else {
+      getWinner(hardcoreModeRules);
+    }
+  }, [getWinner, gameMode]);
 
   const getScore = () => {
     if (result === "win") {
