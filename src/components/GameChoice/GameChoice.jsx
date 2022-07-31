@@ -7,9 +7,15 @@ export default function GameChoice({ handlePlayerChoice, gameMode }) {
   return (
     <GameChoiceWrapper>
       {gameMode === "normal" ? (
-        <NormalGameChoice handlePlayerChoice={handlePlayerChoice} />
+        <NormalGameChoice
+          handlePlayerChoice={handlePlayerChoice}
+          gameMode={gameMode}
+        />
       ) : (
-        <HardcoreGameChoice handlePlayerChoice={handlePlayerChoice} />
+        <HardcoreGameChoice
+          handlePlayerChoice={handlePlayerChoice}
+          gameMode={gameMode}
+        />
       )}
     </GameChoiceWrapper>
   );

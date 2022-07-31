@@ -7,7 +7,6 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 import GameOptions from "../GameOptions/GameOptions";
 import GameRules from "../GameOptions/GameRules/GameRules";
 import GameParams from "../GameOptions/GameParams/GameParams";
-// import { config } from "../../utils/config";
 import GameInformations from "../GameInformations/GameInformations";
 
 export default function App() {

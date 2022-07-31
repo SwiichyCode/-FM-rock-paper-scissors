@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { BtnWrapper } from "../GameChoice/NormalGameChoice/NormalGameChoice.style";
+import { GameButtonWrapper } from "../GameButton/GameButton.style";
 
 export const GamePickedWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 72px;
-  gap: ${(props) => (props.result ? `0px` : `64px`)};
+  gap: ${({ result }) => (result ? `0px` : `64px`)};
 
   .player-picked,
   .ia-picked {
@@ -82,31 +82,21 @@ export const GamePickedWrapper = styled.div`
   }
 `;
 
-export const BtnPicked = styled(BtnWrapper)`
+export const BtnPicked = styled(GameButtonWrapper)`
   position: initial;
   width: 292.61px;
   height: 300px;
 
-  &.btnWrapper-paper {
-    left: initial;
-  }
-  &.btnWrapper-scissors {
-    right: initial;
-  }
-  &.btnWrapper-rock {
-    bottom: initial;
-    left: initial;
-    transform: initial;
-  }
-  &.btnWrapper-lizard {
-    bottom: initial;
-    left: initial;
-    transform: initial;
-  }
+  &.btnWrapper-paper,
+  &.btnWrapper-scissors,
+  &.btnWrapper-rock,
+  &.btnWrapper-lizard,
   &.btnWrapper-spock {
-    bottom: initial;
     left: initial;
+    right: initial;
     transform: initial;
+    bottom: initial;
+    top: initial;
   }
 
   .content-btn {

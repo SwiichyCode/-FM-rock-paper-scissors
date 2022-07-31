@@ -27,14 +27,12 @@ export default function GamePicked({
     }
   }, [setCurrentComputerChoice, gameMode]);
 
-  // Play computer
   useEffect(() => {
     setTimeout(() => {
       playComputer();
     }, 1500);
   }, [playComputer]);
 
-  // Get the winner
   const getWinner = useCallback(
     (rules) => {
       const winner = rules[currentPlayerChoice][currentComputerChoice];
